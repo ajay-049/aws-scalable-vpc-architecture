@@ -8,3 +8,9 @@ To design and deploy a modular, secure, and scalable Virtual Private Cloud (VPC)
 - **Networking:** VPC, Transit Gateway, NAT Gateway, Internet Gateway, ALB, Route 53
 - **Security:** Bastion Host, IAM Roles, Security Groups, AWS Systems Manager (SSM)
 - **Monitoring & Storage:** CloudWatch (Flow Logs, Custom Memory Metrics), S3
+
+## 🏗️ Architecture Implementation Steps
+
+### Phase 1: Network Foundation (VPCs)
+To isolate environments and maintain high security, the architecture is split into two distinct VPCs:
+1. **Bastion VPC (`192.168.0.0/16`):** Created as a dedicated management network. This acts as the secure entry point (jump host environment) for administrators to access the application infrastructure.
