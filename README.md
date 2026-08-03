@@ -17,3 +17,7 @@ To isolate environments and maintain high security, the architecture is split in
 
 ### Phase 2: Subnets Configuration
 - **Bastion Public Subnet (`192.168.1.0/24`):** Created inside the Bastion VPC in a specific Availability Zone. This subnet is configured to auto-assign public IPs to house the Bastion Host, acting as our public-facing secure gateway.
+
+### Phase 3: Internet Connectivity & Routing
+- **Internet Gateway (IGW):** Attached an IGW to the Bastion VPC to allow inbound and outbound internet traffic.
+- **Route Tables:** Configured a custom Route Table (`Bastion-RT`) with a default route (`0.0.0.0/0`) pointing to the IGW, and explicitly associated it with the Bastion Public Subnet to make it truly "Public".
