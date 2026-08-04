@@ -21,3 +21,14 @@ To isolate environments and maintain high security, the architecture is split in
 ### Phase 3: Internet Connectivity & Routing
 - **Internet Gateway (IGW):** Attached an IGW to the Bastion VPC to allow inbound and outbound internet traffic.
 - **Route Tables:** Configured a custom Route Table (`Bastion-RT`) with a default route (`0.0.0.0/0`) pointing to the IGW, and explicitly associated it with the Bastion Public Subnet to make it truly "Public".
+
+### Phase 4: Security & Bastion Host Deployment
+- **Security Groups:** Created `Bastion-SG` acting as a stateful firewall, strictly allowing inbound SSH (Port 22) traffic from the public internet.
+- **Bastion Host (Jump Server):** Deployed an Amazon Linux 2023 EC2 instance (`t3.micro`) within the Bastion Public Subnet. This server serves as the sole secure gateway for administrators to access private application servers via SSH.
+
+
+### Phase 5: Application VPC & High Availability (HA) Architecture
+- **App VPC (`172.32.0.0/16`):** Created a dedicated, isolated network for application workloads with a non-overlapping CIDR block to prevent routing conflicts.
+- **Multi-AZ Subnet Design:** Designed for Fault Tolerance and High Availability by spanning subnets across two distinct Availability Zones (AZs):
+  - **Public Subnets (`172.32.1.0/24`, `172.32.2.0/24`):** To host internet-facing resources like ALBs and NAT Gateways.
+  - **Private Subnets (`172.32.3.0/24`, `172.32.4.0/24`):** Fully isolated networks to host backend application EC2 instances via Auto Scaling Groups.
