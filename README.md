@@ -32,3 +32,7 @@ To isolate environments and maintain high security, the architecture is split in
 - **Multi-AZ Subnet Design:** Designed for Fault Tolerance and High Availability by spanning subnets across two distinct Availability Zones (AZs):
   - **Public Subnets (`172.32.1.0/24`, `172.32.2.0/24`):** To host internet-facing resources like ALBs and NAT Gateways.
   - **Private Subnets (`172.32.3.0/24`, `172.32.4.0/24`):** Fully isolated networks to host backend application EC2 instances via Auto Scaling Groups.
+
+  ### Phase 6: App VPC Internet Connectivity
+- **Internet Gateway (IGW):** Created and attached `App-IGW` to the Application VPC.
+- **Public Routing:** Created a custom Route Table (`App-Public-RT`) routing `0.0.0.0/0` traffic to the IGW. Explicitly associated only the two Public Subnets to this route table, leaving the Private Subnets fully isolated from direct internet access.
