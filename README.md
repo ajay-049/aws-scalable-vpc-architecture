@@ -43,3 +43,5 @@ To isolate environments and maintain high security, the architecture is split in
 
 ### Phase 8: Cross-VPC Private Routing (Transit Gateway)
 - **Transit Gateway:** Provisioned a Transit Gateway (`Main-Transit-Gateway`) to act as a centralized cloud router. This establishes a highly secure, private peering connection between the Bastion VPC and the Application VPC, ensuring SSH traffic never traverses the public internet.
+
+- **VPC Attachments:** Created dedicated Transit Gateway Attachments for both the `Bastion-VPC` and `App-VPC`, effectively plugging both isolated networks into the centralized routing hub.
