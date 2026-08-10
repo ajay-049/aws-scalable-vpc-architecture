@@ -40,3 +40,6 @@ To isolate environments and maintain high security, the architecture is split in
 ### Phase 7: Private Subnet Internet Access (NAT Gateway)
 - **NAT Gateway:** Deployed a NAT Gateway in `App-Public-Subnet-1A` and associated an Elastic IP (EIP) with it. This acts as a proxy for outbound internet traffic.
 - **Private Routing:** Created a dedicated Route Table (`App-Private-RT`) routing `0.0.0.0/0` traffic to the NAT Gateway. Associated both Private Subnets with this Route Table, enabling outbound internet access for private instances (e.g., for OS patching) while blocking all inbound internet connections.
+
+### Phase 8: Cross-VPC Private Routing (Transit Gateway)
+- **Transit Gateway:** Provisioned a Transit Gateway (`Main-Transit-Gateway`) to act as a centralized cloud router. This establishes a highly secure, private peering connection between the Bastion VPC and the Application VPC, ensuring SSH traffic never traverses the public internet.
