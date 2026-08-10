@@ -36,3 +36,7 @@ To isolate environments and maintain high security, the architecture is split in
   ### Phase 6: App VPC Internet Connectivity
 - **Internet Gateway (IGW):** Created and attached `App-IGW` to the Application VPC.
 - **Public Routing:** Created a custom Route Table (`App-Public-RT`) routing `0.0.0.0/0` traffic to the IGW. Explicitly associated only the two Public Subnets to this route table, leaving the Private Subnets fully isolated from direct internet access.
+
+### Phase 7: Private Subnet Internet Access (NAT Gateway)
+- **NAT Gateway:** Deployed a NAT Gateway in `App-Public-Subnet-1A` and associated an Elastic IP (EIP) with it. This acts as a proxy for outbound internet traffic.
+- **Private Routing:** Created a dedicated Route Table (`App-Private-RT`) routing `0.0.0.0/0` traffic to the NAT Gateway. Associated both Private Subnets with this Route Table, enabling outbound internet access for private instances (e.g., for OS patching) while blocking all inbound internet connections.
