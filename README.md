@@ -45,3 +45,6 @@ To isolate environments and maintain high security, the architecture is split in
 - **Transit Gateway:** Provisioned a Transit Gateway (`Main-Transit-Gateway`) to act as a centralized cloud router. This establishes a highly secure, private peering connection between the Bastion VPC and the Application VPC, ensuring SSH traffic never traverses the public internet.
 
 - **VPC Attachments:** Created dedicated Transit Gateway Attachments for both the `Bastion-VPC` and `App-VPC`, effectively plugging both isolated networks into the centralized routing hub.
+
+### Phase 9: Network Monitoring & Logging
+- **CloudWatch Setup:** Created a centralized CloudWatch Log Group (`VPC-Flow-Logs`) to store network traffic data. Created two dedicated Log Streams (`Bastion-VPC-Stream` and `App-VPC-Stream`) to independently monitor and segregate traffic logs from each VPC.
