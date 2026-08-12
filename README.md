@@ -51,3 +51,8 @@ To isolate environments and maintain high security, the architecture is split in
 
 
 - **VPC Flow Logs Enabled:** Activated Flow Logs for both `Bastion-VPC` and `App-VPC` capturing 'All' traffic. Configured an IAM Role to grant the VPC service permissions to push these logs seamlessly to the designated CloudWatch Log Streams, ensuring complete network visibility and auditability.
+
+
+### Phase 10: Application Security Groups
+- **ALB Security Group:** Created `ALB-SG` in the App VPC to strictly allow inbound HTTP (Port 80) traffic from the public internet (`0.0.0.0/0`).
+- **App Server Security Group:** Created `App-Server-SG` for private instances. Configured inbound rules to accept HTTP traffic *only* from the `ALB-SG` (Source SG referencing) and SSH traffic *only* from the Bastion VPC CIDR (`192.168.0.0/16`) via the Transit Gateway, ensuring a zero-trust internal network architecture.
