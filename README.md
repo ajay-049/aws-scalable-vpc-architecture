@@ -48,3 +48,6 @@ To isolate environments and maintain high security, the architecture is split in
 
 ### Phase 9: Network Monitoring & Logging
 - **CloudWatch Setup:** Created a centralized CloudWatch Log Group (`VPC-Flow-Logs`) to store network traffic data. Created two dedicated Log Streams (`Bastion-VPC-Stream` and `App-VPC-Stream`) to independently monitor and segregate traffic logs from each VPC.
+
+
+- **VPC Flow Logs Enabled:** Activated Flow Logs for both `Bastion-VPC` and `App-VPC` capturing 'All' traffic. Configured an IAM Role to grant the VPC service permissions to push these logs seamlessly to the designated CloudWatch Log Streams, ensuring complete network visibility and auditability.
