@@ -56,3 +56,7 @@ To isolate environments and maintain high security, the architecture is split in
 ### Phase 10: Application Security Groups
 - **ALB Security Group:** Created `ALB-SG` in the App VPC to strictly allow inbound HTTP (Port 80) traffic from the public internet (`0.0.0.0/0`).
 - **App Server Security Group:** Created `App-Server-SG` for private instances. Configured inbound rules to accept HTTP traffic *only* from the `ALB-SG` (Source SG referencing) and SSH traffic *only* from the Bastion VPC CIDR (`192.168.0.0/16`) via the Transit Gateway, ensuring a zero-trust internal network architecture.
+
+### Phase 11: Compute Blueprint (Launch Template)
+- **Launch Template:** Created `App-Server-Template` using Amazon Linux 2023 (`t3.micro`). 
+- **Bootstrapping (User Data):** Injected a bash script via User Data to automatically update the OS, install the Apache HTTP server (`httpd`), and serve a custom HTML landing page upon instance initialization. Configured it to use `App-Server-SG` and the existing SSH key pair.
