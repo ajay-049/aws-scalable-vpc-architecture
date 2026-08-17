@@ -60,3 +60,8 @@ To isolate environments and maintain high security, the architecture is split in
 ### Phase 11: Compute Blueprint (Launch Template)
 - **Launch Template:** Created `App-Server-Template` using **Ubuntu Server AMI** (`t3.micro`). 
 - **Bootstrapping (User Data):** Injected a bash script via User Data to automatically update the OS, install the Apache HTTP server (`apache2`), and serve a custom HTML landing page upon instance initialization. Configured it to use `App-Server-SG` and the existing SSH key pair.
+
+### Phase 12: Load Balancing (ALB)
+- **Target Group:** Created an empty instance-based Target Group (`App-Target-Group`) operating on HTTP port 80.
+- **Application Load Balancer:** Provisioned an internet-facing ALB (`App-ALB`) deployed across the two Public Subnets for High Availability. Configured it with the `ALB-SG` security group and set listener rules to forward incoming web traffic to the target group.
+
