@@ -65,3 +65,7 @@ To isolate environments and maintain high security, the architecture is split in
 - **Target Group:** Created an empty instance-based Target Group (`App-Target-Group`) operating on HTTP port 80.
 - **Application Load Balancer:** Provisioned an internet-facing ALB (`App-ALB`) deployed across the two Public Subnets for High Availability. Configured it with the `ALB-SG` security group and set listener rules to forward incoming web traffic to the target group.
 
+### Phase 13: Auto Scaling & High Availability (ASG)
+- **Auto Scaling Group:** Deployed `App-ASG` tightly scoped to the Private Subnets (`1A` & `1B`). 
+- **Configuration:** Configured with a Desired Capacity of 2, Minimum of 2, and Maximum of 4 instances.
+- **Integration:** Integrated seamlessly with `App-Target-Group` and enabled ELB Health Checks to automatically terminate and replace any unhealthy instances, ensuring true self-healing infrastructure.
